@@ -1,0 +1,7 @@
+parameters:
+#    phuria_demo.example.class: Phuria\DemoBundle\Example
+
+services:
+#    phuria_demo.example:
+#        class: %phuria_demo.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,37 @@
+<html>
+    <head>
+        
+        {% block titile %}
+            <title>Demo</title>
+        {% endblock %}
+           
+        {% block style %}
+            <link rel="stylesheet" href="{{ asset('bundles/phuriademo/css/bootstrap.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/phuriademo/css/select2.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/phuriademo/css/style.css') }}" />
+        {% endblock %}
+         
+        {% block script %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="{{ asset('bundles/phuriademo/js/select2.js') }}"></script>
+            <script src="{{ asset('bundles/phuriademo/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/phuriademo/js/demo.js') }}"></script>
+            <script>
+                Demo.loadClinicsDataPath = "{{ path('phuria_demo_get_clinics_data') }}"; 
+                Demo.loadProceduresDataPath = "{{ path('phuria_demo_get_procedures_data') }}";
+            </script>
+        {% endblock %}
+            
+        {% block endhead %}
+            
+        {% endblock %}
+            
+    </head>
+    <body>
+      
+        {% block content %}
+    
+        {% endblock %}
+        
+    </body>
+</html>

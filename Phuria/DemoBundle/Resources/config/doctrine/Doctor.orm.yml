@@ -1,0 +1,42 @@
+Phuria\DemoBundle\Entity\Doctor:
+    type: entity
+    manyToMany:
+        clinics:
+            targetEntity: Clinic
+            inversedBy: clinics
+            joinTable:
+                name: doctors_clinics
+                joinColumns:
+                    doctor_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    clinic_id:
+                        referencedColumnName: id
+        procedures:
+            targetEntity: Procedure
+            inversedBy: procedures
+            joinTable:
+                name: doctors_procedures
+                joinColumns:
+                    doctor_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    procedure_id:
+                        referencedColumnName: id
+    table: doctor
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        description:
+            type: string
+            length: 255
+            nullable: true
+        
+        

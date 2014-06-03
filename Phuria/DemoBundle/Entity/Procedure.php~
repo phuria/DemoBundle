@@ -1,0 +1,12 @@
+<?php
+namespace Phuria\DemoBundle\Entity;
+
+class Procedure
+{
+    protected $id;
+    protected $name;
+    protected $description;
+    protected $doctors;
+}
+
+?>

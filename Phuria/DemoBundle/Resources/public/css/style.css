@@ -1,0 +1,43 @@
+label
+{
+    display: block;
+}
+
+input, select, .select2-container
+{
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.submit
+{
+    width: 300px;
+    margin-top: 20px;
+}
+
+.clinic-label
+{
+    display: none;
+}
+
+.clinic-box
+{
+    margin-bottom: 20px;
+}
+
+.clinic-box .btn
+{
+    width: 70px;
+}
+
+p
+{
+    display: inline-block;
+    margin-left: 5px;
+}
+
+tr:hover
+{
+    cursor: pointer;
+    background-color: #f2dede;
+}

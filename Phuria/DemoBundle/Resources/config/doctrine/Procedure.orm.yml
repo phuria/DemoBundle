@@ -1,0 +1,21 @@
+Phuria\DemoBundle\Entity\Procedure:
+    type: entity
+    manyToMany:
+        doctors:
+            targetEntity: Doctor
+            mappedBy: procedures
+    table: procedure_
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+        
+        

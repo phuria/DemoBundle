@@ -1,0 +1,44 @@
+{% extends "PhuriaDemoBundle:Demo:template.html.twig" %}
+
+{% block content %}
+    <div class="container" style="margin-top: 50px;">
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+                {% for doctor in doctors %}
+                <tr onclick="window.location.href = '{{ path('phuria_demo_homepage', { 'id': doctor.id }) }}';">
+                    <td>{{ doctor.id }}</td>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ doctor.description }}</td>
+                </tr>
+                {% endfor %}
+                <tr id="new_doctor" class="info" onclick="window.location.href = '{{ path('phuria_demo_homepage', { 'id': 0 }) }}';">
+                    <td colspan="4">Add new doctor ...</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            
+                {{ form_errors(form) }}
+            
+                {{ form_row(form.doctorId) }}
+            
+                {{ form_row(form.doctorName) }}
+            
+                {{ form_row(form.doctorDescription) }}
+            
+                {{ form_row(form.doctorProceduresValue) }}
+                
+                {{ form_row(form.doctorCurrentClinics) }}
+                    
+                {{ form_row(form.doctorAvailableClinics) }}
+                    
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
