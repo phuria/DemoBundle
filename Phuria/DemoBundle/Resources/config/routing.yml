@@ -1,10 +1,10 @@
-phuria_demo_get_clinics_data:
-    pattern: /clinics
-    defaults: { _controller: PhuriaDemoBundle:Demo:clinics }
-    
 phuria_demo_get_procedures_data:
-    pattern: /porcedures
+    pattern: /procedures
     defaults: {_controller: PhuriaDemoBundle:Demo:procedures }
+    
+phuria_demo_get_procedures_init_data:
+    pattern: /procedures/init/{doctorId}
+    defaults: {_controller: PhuriaDemoBundle:Demo:initProcedures }
 
 phuria_demo_homepage:
     pattern:  /{id}

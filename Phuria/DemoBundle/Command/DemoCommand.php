@@ -12,7 +12,7 @@ use Phuria\DemoBundle\Entity\Procedure;
 
 class DemoCommand extends ContainerAwareCommand
 {
-    protected $listTables = ['clinic', 'clinics_doctors', 'doctor', 'doctors_procedures', 'procedure_'];
+    protected $listTables = ['clinic', 'doctors_clinics', 'doctor', 'doctors_procedures', 'procedure_'];
     protected $clinicsNames = ['Tavistock Clinic', 'Suitcase Clinic', 'The Edmonton Clinic', 'The Shyness Clinic', 'Mayo Clinic'];
     protected $doctorsNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore'];
     protected $proceduresNames = ['A-Scan Biometry', 'Bone Scan', 'Fluoroscopy', 'Lymphoscintigraphy', 'Mammogram', 'Pulmonary Angiography'];

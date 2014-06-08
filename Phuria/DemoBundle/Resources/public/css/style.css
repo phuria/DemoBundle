@@ -30,6 +30,24 @@ input, select, .select2-container
     width: 70px;
 }
 
+.add
+{
+    width: 300px;
+    display: block;
+}
+
+.sub-label
+{
+    font-size: 12px;
+}
+
+hr
+{
+    width: 300px;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
 p
 {
     display: inline-block;

@@ -14,16 +14,6 @@ class Clinic implements DemoInterface
     {
         $this->doctors = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
-    public function __toString()
-    {
-        return $this->id . ": " . $this->name . " | " . $this->description;
-    }
-    
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * Get id

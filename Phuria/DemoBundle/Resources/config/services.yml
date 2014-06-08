@@ -2,6 +2,9 @@ parameters:
 #    phuria_demo.example.class: Phuria\DemoBundle\Example
 
 services:
-#    phuria_demo.example:
-#        class: %phuria_demo.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    phuria_demo.form.type.select2:
+        class: Phuria\DemoBundle\Form\Type\Select2Type
+        arguments: 
+            objectManager: "@doctrine.orm.entity_manager"
+        tags:
+            - { name: form.type, alias: select2 }

@@ -9,11 +9,18 @@ class ClinicType extends AbstractType
 {    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id', 'hidden', array(
-           'attr' => array('class' => 'clinic-id')
+        $builder->add('id', 'text', array(
+           'attr' => array('class' => 'clinic-id'),
+           'label_attr' => array('class' => 'sub-label'),
+           'disabled' => true
         ));
-        $builder->add('name', 'hidden', array(
-           'attr' => array('class' => 'clinic-name')
+        $builder->add('name', 'text', array(
+           'attr' => array('class' => 'clinic-name'),
+           'label_attr' => array('class' => 'sub-label'),
+        ));
+        $builder->add('description', 'text', array(
+           'attr' => array('class' => 'clinic-description'),
+           'label_attr' => array('class' => 'sub-label'),
         ));
     }
     

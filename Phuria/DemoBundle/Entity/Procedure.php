@@ -14,11 +14,6 @@ class Procedure implements DemoInterface
     {
         $this->doctors = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
-    public function __toString()
-    {
-        return $this->id . ": " . $this->name . " | " . $this->description;
-    }
 
     /**
      * Get id

@@ -1,5 +1,6 @@
 Phuria\DemoBundle\Entity\Procedure:
     type: entity
+    repositoryClass: Phuria\DemoBundle\Repository\ProcedureRepository
     manyToMany:
         doctors:
             targetEntity: Doctor

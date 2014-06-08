@@ -26,17 +26,22 @@
             
                 {{ form_errors(form) }}
             
-                {{ form_row(form.doctorId) }}
+                {{ form_row(form.id) }}
             
-                {{ form_row(form.doctorName) }}
+                {{ form_row(form.name) }}
             
-                {{ form_row(form.doctorDescription) }}
+                {{ form_row(form.description) }}
             
-                {{ form_row(form.doctorProceduresValue) }}
+                {{ form_row(form.procedures) }}
+            
                 
-                {{ form_row(form.doctorCurrentClinics) }}
-                    
-                {{ form_row(form.doctorAvailableClinics) }}
+                
+                <div class="clinic-form" data-prototype="{{ form_widget(form.clinics.vars.prototype)|e }}">
+                    {{ form_label(form.clinics) }}
+                    {% for clinic in form.clinics %}
+                        {{ form_row(clinic) }}
+                    {% endfor %}
+                </div>
                     
             {{ form_end(form) }}
         </div>

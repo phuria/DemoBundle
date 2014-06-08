@@ -17,8 +17,9 @@
             <script src="{{ asset('bundles/phuriademo/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('bundles/phuriademo/js/demo.js') }}"></script>
             <script>
-                Demo.loadClinicsDataPath = "{{ path('phuria_demo_get_clinics_data') }}"; 
-                Demo.loadProceduresDataPath = "{{ path('phuria_demo_get_procedures_data') }}";
+                Demo.baseUrl = "{{ app.request.getBaseURL() }}";
+                Demo.loadProceduresUrl = Demo.baseUrl + "/procedures";
+                Demo.loadInitProceduresUrl = Demo.baseUrl + "/procedures/init/";
             </script>
         {% endblock %}
             

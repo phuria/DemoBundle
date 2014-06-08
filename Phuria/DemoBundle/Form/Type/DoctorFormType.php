@@ -8,24 +8,27 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class DoctorFormType extends AbstractType
 {    
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add('doctorId', 'number', array(
+    {        
+        $builder->add('id', 'number', array(
             'label' => 'ID',
             'disabled' => true
         ));
-        $builder->add('doctorName', 'text', array(
+        $builder->add('name', 'text', array(
             'label' => 'Name',
             'required' => false
         ));
-        $builder->add('doctorDescription', 'text', array(
+        $builder->add('description', 'text', array(
             'label' => 'Description',
             'required' => false
         ));
-        $builder->add('doctorProceduresValue', 'text', array(
+        $builder->add('procedures', 'select2', array(
+            'class' => 'Phuria\DemoBundle\Entity\Procedure',
+            'property' => 'id',
+            'repository' => 'PhuriaDemoBundle:Procedure',
             'label' => 'Procedures',
-            'required' => false,
+            'required' => false
         ));
-        $builder->add('doctorCurrentClinics', 'collection', array(
+        $builder->add('clinics', 'collection', array(
             'type' => new ClinicType(),
             'label' => 'Clinics',
             'allow_add' => true,
@@ -38,20 +41,6 @@ class DoctorFormType extends AbstractType
                 'attr' => array('class' => 'clinic-box'),
                 'label_attr' => array('class' => 'clinic-label')
             )
-        ));
-        $builder->add('doctorAvailableClinics', 'collection', array(
-            'type' => new ClinicType(),
-            'label' => 'Available clinics',
-            'allow_add' => true,
-            'allow_delete' => true,
-            'prototype' => true,
-            'by_reference' => false,
-            'required' => false,
-            'options' => array(
-                 'required' => false,
-                 'attr' => array('class' => 'clinic-box'),
-                 'label_attr' => array('class' => 'clinic-label')
-             )
         ));
         $builder->add('Save', 'submit', array(
             'attr' => array('class' => 'btn btn-primary btn-lg submit')
@@ -66,7 +55,7 @@ class DoctorFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Phuria\DemoBundle\Entity\DoctorForm',
+            'data_class' => 'Phuria\DemoBundle\Entity\Doctor',
         ));
     }
 }

@@ -1,9 +1,11 @@
 Phuria\DemoBundle\Entity\Doctor:
     type: entity
+    repositoryClass: Phuria\DemoBundle\Repository\DoctorRepository
     manyToMany:
         clinics:
             targetEntity: Clinic
             inversedBy: clinics
+            cascade: ["persist", "merge"]
             joinTable:
                 name: doctors_clinics
                 joinColumns:

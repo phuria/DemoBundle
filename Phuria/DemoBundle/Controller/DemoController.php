@@ -4,7 +4,6 @@ namespace Phuria\DemoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Phuria\DemoBundle\Entity\DoctorForm;
 use Phuria\DemoBundle\Entity\Doctor;
 use Phuria\DemoBundle\Entity\Clinic;
 use Phuria\DemoBundle\Form\Type\DoctorFormType;
@@ -15,92 +14,24 @@ class DemoController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $doctors = $entityManager->getRepository('PhuriaDemoBundle:Doctor')->findAll();
-        $doctorForm = new DoctorForm();
         
         if($id == 0)
         {
-            $actionDoctor = new Doctor();
+            $doctor = new Doctor();
         }
         else
         {
-            $actionDoctor = $entityManager->getRepository('PhuriaDemoBundle:Doctor')->find($id);
+            $doctor = $entityManager->getRepository('PhuriaDemoBundle:Doctor')->find($id);
         }
         
-        $proceduresValue = $this->getCollectionValue($actionDoctor->getProcedures());
-        $availableClinics = $entityManager->getRepository('PhuriaDemoBundle:Clinic')->findAll();
-        
-        $doctorForm
-           ->setDoctorId($actionDoctor->getId())
-           ->setDoctorName($actionDoctor->getName())
-           ->setDoctorDescription($actionDoctor->getDescription())
-           ->setDoctorProceduresValue($proceduresValue)
-           ->setDoctorCurrentClinics($actionDoctor->getClinics())
-           ->setDoctorAvailableClinics($availableClinics);
-        
-        $form = $this->createForm(new DoctorFormType(), $doctorForm);
-        
+        $form = $this->createForm(new DoctorFormType(), $doctor);
         $form->handleRequest($request);
         
         if($form->isValid()) 
         {
-            $data = $form->getData();
-            
-            if($data->getDoctorId() == 0)
-            {
-                $doctor = new Doctor();
-                $entityManager->persist($doctor);
-            }
-            else
-            {
-                $doctor = $entityManager->getRepository('PhuriaDemoBundle:Doctor')->find($data->getDoctorId());
-            }
-            
-            $procedures = $entityManager->getRepository('PhuriaDemoBundle:Procedure')->findAll();
-            $clinics = $entityManager->getRepository('PhuriaDemoBundle:Clinic')->findAll();
-            
-            if($data->getDoctorProceduresValue())
-            {
-                $value = $data->getDoctorProceduresValue();
-                $proceduresSelected = explode(",", $value);
-            }
-            else
-            {
-                $proceduresSelected = array();
-            }
-            
-            $clinicsSelected = $data->getDoctorCurrentClinics()->toArray();
-            
-            $doctor
-               ->setName($data->getDoctorName())
-               ->setDescription($data->getDoctorDescription())
-               ->clearProcedures()
-               ->clearClinics();
-                        
-            foreach($proceduresSelected as $id)
-            {
-                foreach($procedures as $procedure)
-                {
-                    if($procedure->getId() == $id)
-                    {
-                        $doctor->addProcedure($procedure);
-                        break;
-                    }
-                }
-            }
-            
-            foreach($clinicsSelected as $selectedClinic)
-            {
-                foreach($clinics as $clinic)
-                {
-                    if($clinic->getId() == $selectedClinic->getId())
-                    {
-                        $doctor->addClinic($clinic);
-                    }
-                }
-            }
-            
+            $doctor = $form->getData();
+            $entityManager->persist($doctor);
             $entityManager->flush();
-            
         }
         
 
@@ -110,11 +41,11 @@ class DemoController extends Controller
         ));
     }
 
-    
-    public function proceduresAction()
+    public function proceduresAction(Request $request)
     {
+        $query = $request->query->get('query');
         $entityManager = $this->getDoctrine()->getManager();
-        $procedures = $entityManager->getRepository('PhuriaDemoBundle:Procedure')->findAll();
+        $procedures = $entityManager->getRepository('PhuriaDemoBundle:Procedure')->findNameLike($query);
         $response = new JsonResponse();
         $data = array();
         
@@ -127,16 +58,20 @@ class DemoController extends Controller
         return $response;
     }
     
-    protected function getCollectionValue($collection)
+    public function initProceduresAction($doctorId)
     {
-        $values = array();
+        $entityManager = $this->getDoctrine()->getManager();
+        $doctor = $entityManager->getRepository('PhuriaDemoBundle:Doctor')->find($doctorId);
+        $procedures = $doctor->getProcedures()->toArray();
+        $response = new JsonResponse();
         
-        foreach($collection->toArray() as $element)
+        foreach($procedures as $procedure)
         {
-            $values[] = $element->getId();
+            $data[] = array('id' => $procedure->getId(), 'text' => $procedure->getName());
         }
         
-        return implode($values, ',');
+        $response->setData($data);
+        return $response;
     }
     
 }
